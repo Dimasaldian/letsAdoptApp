@@ -1,0 +1,501 @@
+:root {
+    --primary: #e95420;
+    --bg: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 7%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid white;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.navbar .judul {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e95420;
+    font-style: italic;
+}
+
+.navbar .judul span {
+    color: #ff0400;
+}
+
+.navbar .navbar-nav a {
+    color: var(--primary);
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0 1rem;
+}
+
+.navbar .navbar-nav a:hover {
+    color: #ff0400;
+}
+
+.navbar .navbar-nav a::after {
+    content: '';
+    display: block;
+    padding-bottom: 0.5rem 8px;
+    border-bottom: 0.1rem solid var(--primary);
+    transform: scaleX(0);
+    transition: 0.2s linear;
+}
+
+.navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.5);
+}
+
+.navbar .navbar-extra a {
+    color: #000000;
+    margin: 0 0.5rem;
+}
+
+.navbar .navbar-extra button {
+    background-color: #e95420;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .navbar-extra button:hover {
+    background-color: #ff0400;
+    transform: scale(1.1);
+}
+
+#hamburger-menu {
+    display: none;
+}
+
+#bahasa {
+    display: none;
+}
+
+/* Hero Section Styles */
+.hero .content h2 {
+    color: var(--primary);
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url(/public/img/background-hero.jpg);
+    background-repeat: no-repeat;
+    color: #000000;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hero .content {
+    padding: 10rem;
+    padding-left: 5rem;
+    margin-top: 8.5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 4rem;
+    max-width: 100%;
+    max-height: 100%;
+    background-image: url(/public/img/background-people.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.hero .content h2 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-right: 15rem;
+}
+
+.hero .content p {
+    font-size: 1.6rem;
+    margin-top: 0.5rem;
+    margin-right: 15rem;
+}
+
+/* Search Container Styles */
+.search-container {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 5rem;
+}
+
+.search-container h2 {
+    color: #e95420;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.pet-search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+select {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 120px;
+    font-size: 14px;
+    background-color: lightgray;
+    margin-bottom: 21px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e95420;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #d6471c;
+    transition: 0.3s;
+}
+
+/* Pet Listing Styles */
+.list-pet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 30px;
+    margin: 5rem;
+    margin-top: -25px;
+}
+
+.card-container {
+    display: grid; /* Menggunakan grid layout untuk kontrol lebih baik */
+    grid-template-columns: repeat(4, 1fr); /* Maksimal 4 kartu per baris */
+    gap: 40px; /* Jarak antar kartu */
+    justify-content: space-between; /* Jarak antar kartu merata */
+    padding: 20px;
+    width: 1100px; /* Lebar container */
+    overflow: hidden;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%; /* Lebar gambar mengikuti kartu */
+    height: 200px; /* Tinggi gambar */
+    object-fit: cover; /* Memastikan gambar proporsional tanpa terdistorsi */
+    border-bottom: 1px solid #eee;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card a {
+    text-decoration: none;
+    color: #e95420;
+    text-align: left;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.prev {
+    position: absolute;
+    left: 10px;
+}
+
+.next {
+    position: absolute;
+    right: 10px;
+}
+
+/* Dashboard-Specific Styles */
+.menu {
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu .judul {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e95420;
+    font-style: italic;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 2rem;
+}
+
+.menu .judul span {
+    color: #ff0400;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    font-size: 18px;
+    padding: 15px 20px;
+}
+
+.menu .navbar-nav {
+    margin-top: 3rem;
+}
+
+.menu .navbar-nav a:hover {
+    background-color: #575757;
+}
+
+.content {
+    height: 100vh;
+    margin-left: 270px;
+    padding: 20px;
+}
+
+.popup-form {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    position: relative;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkbox-group {
+    margin: 15px 0;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.submit-btn {
+    background: #e95420;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #d6471c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #333; /* Warna latar belakang */
+    color: #fff; /* Warna teks */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links li {
+    display: inline;
+}
+
+.footer-links a {
+    color: #e94d1a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.contact-us {
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.contact-us h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-us p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button {
+    display: block;
+    width: 100%;
+    background-color: #e94d1a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #c74014;
+}

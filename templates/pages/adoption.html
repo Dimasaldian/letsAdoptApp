@@ -1,0 +1,57 @@
+{{ define "adoption_list" }}
+<body>
+    <section class="menu" id="menu">
+        <nav class="menu">
+            <a href="#" class="judul">Lets<span>Adopt</span></a>
+
+            <div class="navbar-nav">
+                <a href="/dashboard" class="{{ if eq .activePage "dashboard" }}active{{ end }}">Beranda</a>
+                <a href="/dashboard/listpet" class="{{ if eq .activePage "listpet" }}active{{ end }}">Daftar Hewan</a>
+                <a href="/dashboard/add" class="{{ if eq .activePage "add" }}active{{ end }}">Tambah Hewan</a>
+                <a href="/dashboard/adoptions" class="{{ if eq .activePage "adoptions" }}active{{ end }}">Pengajuan Adopsi</a>
+                <a href="/dashboard/complaints" class="{{ if eq .activePage "complaints" }}active{{ end }}">Saran / Komplain</a>
+                <a href="/logout">Log out</a>
+            </div>
+        </nav>
+    </section>
+
+    <section class="content">
+        <h1>Pengajuan Adopsi</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Pengadopsi</th>
+                    <th>Email</th>
+                    <th>Nama Hewan</th>
+                    <th>Alasan</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .adoptions }}
+                <tr>
+                    <td>{{ .IDAdopt }}</td>
+                    <td>{{ .Name }}</td>
+                    <td>{{ .Email }}</td>
+                    <td>{{ .Pet.Name }}</td> <!-- Gunakan relasi Pet untuk mendapatkan nama hewan -->
+                    <td>{{ .Reason }}</td>
+                    <td>{{ .Status }}</td>
+                    <td>{{ .CreatedAt.Format "02 Jan 2006" }}</td>
+                    <td>
+                        {{ if eq .Status "pending" }}
+                        <button class="approve-btn" data-id="{{ .IDAdopt }}">Setujui</button>
+                        <button class="reject-btn" data-id="{{ .IDAdopt }}">Tolak</button>
+                        {{ else }}
+                        <span>{{ .Status }}</span>
+                        {{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </section>
+</body>
+{{ end }}

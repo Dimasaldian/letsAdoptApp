@@ -1,0 +1,69 @@
+{{ define "listpet"}}
+    <section id="adopsi" class="adopsi">
+        <div class="search-container">
+            <h2>Gunakan pencarian cepat kami untuk menemukan peliharaan yang cocok untuk anda</h2>
+        <div class="pet-search-form">
+            <div class="form-group">
+                <form action="#" class="form-group">
+                <label for="type-of-pet">Tipe peliharaan</label>
+                    <select id="type-of-pet">
+                        <option>Pilih...</option>
+                        <option>Anjing</option>
+                        <option>Kucing</option>
+                    </select>
+                </div>
+             <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender">
+                <option>Pilih...</option>
+                <option>Laki-laki</option>
+                <option>Perempuan</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="size">Ukuran</label>
+            <select name="" id="size">
+                <option>Pilih...</option>
+                <option>Kecil</option>
+                <option>Sedang</option>
+                <option>Besar</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age">Umur</label>
+            <select name="" id="age">
+                <option>Pilih...</option>
+                <option>Anak-anak</option>
+                <option>Dewasa</option>
+                <option>Senior</option>
+            </select>
+        </div>
+        <button type="submit">Cari Peliharaan</button>
+    </form>
+    </div>
+    </div>
+    </section>
+
+    <section class="list-pet" id="list-pet">
+        <div class="list-pet">
+    
+            <div class="card-container">
+                {{ range .pets }}
+                    <div class="card">
+                        {{ if .Images }}
+                            <img src="{{ (index .Images 0).URL }}" alt="Gambar {{ .Name }}" loading="lazy" class="card-img">
+                        {{ else }}
+                            <img src="/public/img/default-placeholder.png" alt="No Image Available" loading="lazy" class="card-img">
+                        {{ end }}
+                        <div class="card-body">
+                            <h2>{{ .Name }}</h2>
+                            <a href="/pets/{{ .Name }}" class="adopt-link" data-name="{{ .Name }}">Kenalan dengan saya!</a>
+
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+</body>
+{{ end }}

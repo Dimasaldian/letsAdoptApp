@@ -1,0 +1,122 @@
+{{ define "login"}}
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            width: 360px;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            font-size: 24px;
+            color: #333;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .login-container span {
+            font-weight: bold;
+            color: #e94d1a; /* Highlight color */
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            color: #333;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-group input:focus {
+            border-color: #e94d1a;
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: #e94d1a;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            background-color: #c74014;
+        }
+
+        .password-icon {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #d9534f;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login <span>LetsAdopt</span></h1>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group password-container">
+                <input type="password" name="password" placeholder="Password" required>
+                <span class="password-icon" onclick="togglePasswordVisibility()">👁️</span>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+        {{ if .error }}
+        <p class="error-message">{{ .error }}</p>
+        {{ end }}
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.querySelector('input[name="password"]');
+            const icon = document.querySelector('.password-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.textContent = '🙈'; // Change icon
+            } else {
+                passwordInput.type = 'password';
+                icon.textContent = '👁️'; // Change icon
+            }
+        }
+    </script>
+</body>
+{{ end }}

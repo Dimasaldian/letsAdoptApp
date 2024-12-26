@@ -1,0 +1,146 @@
+{{ define "dashboard_listpet" }}
+<style>
+/* Overall Page Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styling */
+.menu {
+    width: 250px; /* Set the navbar width */
+    background-color: #333; /* Dark background for navbar */
+    color: white;
+    position: fixed; /* Fix navbar on the left */
+    top: 0;
+    left: 0;
+    height: 100%; /* Full height */
+    overflow: auto;
+}
+
+.menu .navbar-nav a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.menu .navbar-nav a:hover {
+    background-color: #575757;
+}
+
+/* Content Area */
+.list-pet-container {
+    margin-left: 260px; /* Add margin to avoid overlap with navbar */
+    padding: 20px; /* Add padding for spacing */
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: middle; /* Align text vertically in the middle */
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table img {
+    width: 80px; /* Set a fixed width for all images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #fff;
+}
+
+</style>
+<body>
+    <section class="menu" id="menu">
+        <nav class="menu">
+            <a href="#" class="judul">Lets<span>Adopt</span></a>
+
+            <div class="navbar-nav">
+                <a href="/dashboard" class="{{ if eq .activePage "dashboard" }}active{{ end }}">Beranda</a>
+                <a href="/dashboard/listpet" class="{{ if eq .activePage "listpet" }}active{{ end }}">Daftar Hewan</a>
+                <a href="/dashboard/add" class="{{ if eq .activePage "add" }}active{{ end }}">Tambah Hewan</a>
+                <a href="/dashboard/adoptions" class="{{ if eq .activePage "adoptions" }}active{{ end }}">Pengajuan Adopsi</a>
+                <a href="/dashboard/complaints" class="{{ if eq .activePage "complaints" }}active{{ end }}">Saran / Komplain</a>
+                <a href="/logout">Log out</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section class="list-pet" id="list-pet">
+        <div class="list-pet-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nama Hewan</th>
+                        <th>Jenis Hewan</th>
+                        <th>Usia</th>
+                        <th>Deskripsi</th>
+                        <th>Negara</th>
+                        <th>Gambar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .pets }}
+                    <tr>
+                        <td>{{ .Name }}</td>
+                        <td>{{ .Type }}</td>
+                        <td>{{ .Age }}</td>
+                        <td>{{ .Description }}</td>
+                        <td>{{ .Negara }}</td>
+                        <td>
+                            {{ if .Images }}
+                                {{ range $index, $image := .Images }}
+                                    {{ if eq $index 0 }}
+                                        <img src="{{ $image.URL }}" alt="Image of {{ $.Name }}" width="100">
+                                    {{ end }}
+                                {{ end }}
+                            {{ else }}
+                                <img src="/public/img/default-placeholder.png" alt="No Image Available" width="100">
+                            {{ end }}
+                        </td>
+                        
+                                             
+                        <td>
+                            <a href="/admin/pet/edit/{{ .ID }}">Edit</a> |
+                            <form action="/admin/pet/delete/{{ .ID }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus hewan ini?')">
+                                <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
+        feather.replace();
+    </script>
+</body>
+{{ end }}

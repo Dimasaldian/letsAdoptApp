@@ -1,0 +1,66 @@
+{{ define "edit_pet" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Hewan</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <section class="menu" id="menu">
+        <nav class="menu">
+            <a href="#" class="judul">Lets<span>Adopt</span></a>
+
+            <div class="navbar-nav">
+                <a href="/dashboard">Beranda</a>
+                <a href="/dashboard/listpet">Daftar Hewan</a>
+                <a href="/dashboard/add">Tambah Hewan</a>
+                <a href="#">Pengajuan Adopsi</a>
+                <a href="#">Saran / Komplain</a>
+                <a href="#">Log out</a>
+            </div>
+        </nav>
+    </section>
+
+    <section class="content" id="content">
+        <div class="beranda">
+            <h1>Edit Hewan</h1>
+            <form action="/admin/pet/update/{{ .pet.ID }}" method="POST" enctype="multipart/form-data">
+                <label for="name">Nama Hewan:</label>
+                <input type="text" id="name" name="name" value="{{ .pet.Name }}" required><br><br>
+
+                <label for="type">Jenis Hewan:</label>
+                <select id="type" name="type" required>
+                    <option value="">Pilih Jenis Hewan</option>
+                    <option value="dog" {{ if eq .pet.Type "dog" }}selected{{ end }}>Anjing</option>
+                    <option value="cat" {{ if eq .pet.Type "cat" }}selected{{ end }}>Kucing</option>
+                    <option value="bird" {{ if eq .pet.Type "bird" }}selected{{ end }}>Burung</option>
+                    <option value="other" {{ if eq .pet.Type "other" }}selected{{ end }}>Lainnya</option>
+                </select>
+                
+                <label for="breed">Ras:</label>
+                <input type="text" id="breed" name="breed" value="{{ .pet.Breed }}"><br><br>
+
+                <label for="age">Usia:</label>
+                <input type="number" id="age" name="age" value="{{ .pet.Age }}"><br><br>
+
+                <label for="description">Deskripsi:</label>
+                <textarea id="description" name="description">{{ .pet.Description }}</textarea><br><br>
+
+                <label for="vaccinated">Vaksinasi:</label>
+                <input type="checkbox" id="vaccinated" name="vaccinated" value="true" {{ if .pet.Vaccinated }}checked{{ end }}><br><br>
+
+                <label for="images">Gambar:</label>
+                <input type="file" id="images" name="images" multiple><br><br>
+
+                <input type="submit" value="Simpan">
+            </form>
+        </div>
+    </section>
+    <script>
+        feather.replace();
+    </script>
+</body>
+{{ end }}
